@@ -1,0 +1,169 @@
+ :root {
+     --main-color: #F6E9DC;
+     --accent-color: #D4B89C;
+     --text-color: #3B3834;
+     --button-color: #A89078;
+     --button-hover: #8B7561;
+     --input-bg: #FFFFFF;
+     --success-color: #8B7561;
+ }
+
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+
+ body {
+     font-family: Assistant, system-ui, -apple-system, sans-serif;
+     direction: rtl;
+     background-color: var(--main-color);
+     color: var(--text-color);
+     min-height: 100vh;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     line-height: 1.5;
+ }
+
+ .box {
+     display: block;
+     width: 500px;
+     height: 500px;
+ }
+
+ h1 {
+     text-align: center;
+     font-size: 4rem;
+     text-shadow: 0 4px 20px rgba(249, 130, 3, 0.95);
+ }
+
+ #questionContainer {
+     width: 90%;
+     max-width: 480px;
+     background: var(--input-bg);
+     border-radius: 20px;
+     box-shadow: 0 4px 20px rgba(166, 144, 120, 0.15);
+     padding: 2.5rem;
+     margin: 1rem;
+     border: 1px solid var(--accent-color);
+     text-align: center;
+ }
+
+ #questionText {
+     font-size: 1.5rem;
+     font-weight: 500;
+     margin-bottom: 2rem;
+     color: var(--text-color);
+     text-align: center;
+     letter-spacing: -0.02em;
+ }
+
+ #inputContainer {
+     display: flex;
+     flex-direction: column;
+     gap: 1.25rem;
+     align-items: center;
+ }
+
+ #inputContainer button {
+     background-color: var(--button-color);
+     color: white;
+     border: none;
+     border-radius: 12px;
+     padding: 0.875rem 1.75rem;
+     font-size: 1.125rem;
+     font-weight: 400;
+     cursor: pointer;
+     transition: all 0.3s ease;
+     width: 100%;
+     max-width: 200px;
+     letter-spacing: 0.02em;
+ }
+
+ #inputContainer button:hover {
+     background-color: var(--button-hover);
+     transform: translateY(-2px);
+ }
+
+ #inputContainer button:active {
+     transform: translateY(0);
+ }
+
+ #inputContainer input {
+     width: 100%;
+     padding: 1rem;
+     font-size: 1.125rem;
+     border: 1px solid var(--accent-color);
+     border-radius: 12px;
+     transition: all 0.3s ease;
+     text-align: center;
+     background-color: var(--input-bg);
+     color: var(--text-color);
+ }
+
+ #inputContainer input:focus {
+     outline: none;
+     border-color: var(--button-color);
+     box-shadow: 0 0 0 3px rgba(166, 144, 120, 0.2);
+ }
+
+ .success-message {
+     text-align: center;
+ }
+
+ .success-message h2 {
+     color: var(--text-color);
+     font-size: 2rem;
+     margin-bottom: 1.5rem;
+     font-weight: 500;
+ }
+
+ .success-message p {
+     color: var(--success-color);
+     font-size: 1.5rem;
+     font-weight: 400;
+     line-height: 1.4;
+ }
+
+ .gender-buttons {
+     display: flex;
+     gap: 1.25rem;
+     width: 100%;
+     justify-content: center;
+ }
+
+ .gender-buttons button {
+     flex: 1;
+     max-width: 150px;
+ }
+
+ input[type="number"] {
+     -moz-appearance: textfield;
+ }
+
+ input[type="number"]::-webkit-outer-spin-button,
+ input[type="number"]::-webkit-inner-spin-button {
+     -webkit-appearance: none;
+     margin: 0;
+ }
+
+ @media (max-width: 480px) {
+     #questionContainer {
+         padding: 2rem;
+     }
+
+     #questionText {
+         font-size: 1.25rem;
+     }
+
+     .gender-buttons {
+         flex-direction: column;
+         align-items: center;
+     }
+
+     .gender-buttons button {
+         width: 100%;
+         max-width: 200px;
+     }
+ }

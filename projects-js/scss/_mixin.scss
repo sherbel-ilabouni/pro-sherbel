@@ -1,0 +1,90 @@
+// משתנים
+$primary-color: #007bff;
+$background-light: #f4f4f4;
+$white: #fff;
+$text-color: #333;
+$box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+// עיצוב גלובלי
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: $background-light;
+}
+
+// הקונטיינר הראשי
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: $white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: $box-shadow;
+}
+
+.head {
+    margin-bottom: 20px;
+}
+
+// כפתור יצירת משתמש
+#generate {
+    background-color: $primary-color;
+    color: $white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+
+    &:hover {
+        background-color: darken($primary-color, 10%);
+    }
+}
+
+.spinner {
+    display: none;
+    margin-right: 10px;
+    width: 30px;
+}
+
+// עיצוב מידע המשתמש
+#user {
+    margin-top: 20px;
+    text-align: center;
+
+    img {
+        border-radius: 50%;
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        margin-bottom: 10px;
+    }
+
+    p {
+        margin-bottom: 5px;
+        text-align: left;
+        font-size: 1.1rem;
+
+        span {
+            font-weight: bold;
+            margin-right: 3px;
+        }
+    }
+}

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מרכז לימוד אלעימד</title>
+    <link rel="icon" href="logo.jpg" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="Script.js" defer></script>
+
+<body>
+    <button class="mobile-menu-btn" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <aside id="sidebar">
+        <div class="logo-container">
+            <h1 class="logo">מרכז אלעימד</h1>
+            <p class="logo-subtitle">מרכז למצוינות בחינוך</p>
+            <img src="logo.jpg" alt="logo" class="logo-img">
+        </div>
+
+        <nav>
+            <button onclick="showContent('courses')" class="nav-item active">
+                <i class="fas fa-book"></i>
+                קורסים
+            </button>
+            <button onclick="showContent('activities')" class="nav-item">
+                <i class="fas fa-puzzle-piece"></i>
+                פעילויות
+            </button>
+            <button onclick="showContent('preparation')" class="nav-item">
+                <i class="fas fa-graduation-cap"></i>
+                הכנה לכיתה א'
+            </button>
+            <button onclick="showContent('gallery')" class="nav-item">
+                <i class="fas fa-images"></i>
+                גלריה
+            </button>
+            <button onclick="showContent('games')" class="nav-item">
+                <i class="fas fa-gamepad"></i>
+                משחקים
+            </button>
+            <button onclick="showContent('about')" class="nav-item">
+                <i class="fas fa-info-circle"></i>
+                אודות
+            </button>
+        </nav>
+    </aside>
+
+    <main>
+        <section id="courses" class="content active">
+            <div class="section-header">
+                <h2>הקורסים שלנו</h2>
+                <p>מגוון קורסים מותאמים אישית להצלחת ילדכם</p>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-language"></i></div>
+                    <h3>עברית</h3>
+                    <p>לימוד קריאה וכתיבה בשיטה ייחודית ומוכחת</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-calculator"></i></div>
+                    <h3>מתמטיקה</h3>
+                    <p>פיתוח חשיבה מתמטית והבנת מושגי יסוד</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-brain"></i></div>
+                    <h3>כישורי חשיבה</h3>
+                    <p>פיתוח מיומנויות חשיבה וכישורי למידה</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="activities" class="content">
+            <div class="section-header">
+                <h2>פעילויות מיוחדות</h2>
+                <p>חוויות למידה מעשירות ומהנות</p>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-palette"></i></div>
+                    <h3>יצירה</h3>
+                    <p>סדנאות יצירה המשלבות למידה והנאה</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-music"></i></div>
+                    <h3>מוזיקה</h3>
+                    <p>שילוב מוזיקה בתהליך הלמידה</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-users"></i></div>
+                    <h3>פעילות חברתית</h3>
+                    <p>פיתוח כישורים חברתיים דרך משחק ולמידה</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="preparation" class="content">
+            <div class="section-header">
+                <h2>הכנה לכיתה א'</h2>
+                <p>תכנית מקיפה להכנה מיטבית</p>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-book-reader"></i></div>
+                    <h3>מוכנות לקריאה</h3>
+                    <p>פיתוח מודעות פונולוגית והכנה לקריאה</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-pencil-alt"></i></div>
+                    <h3>כתיבה</h3>
+                    <p>תרגול אחיזת עיפרון וכתיבה נכונה</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-shapes"></i></div>
+                    <h3>מושגי יסוד</h3>
+                    <p>הקניית מושגים בסיסיים במתמטיקה</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="content">
+            <div class="section-header">
+                <h2>גלריה</h2>
+                <p>רגעים מיוחדים ממרכז הלמידה שלנו</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="img/img1.jpg" alt="img ">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/img2.jpg" alt="img ">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/img3.jpg" alt="img ">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/img4.jpg" alt=" img">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/img5.jpg" alt="img ">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/img6.jpg" alt="img ">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/img7.jpg" alt="img ">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/img8.jpg" alt="img ">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/img9.jpg" alt="img ">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/img10.jpg" alt=" img">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/img11.jpg" alt="img ">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/img12.jpg" alt="img ">
+                </div>
+            </div>
+        </section>
+
+        <section id="games" class="content">
+            <div class="section-header">
+                <h2>משחקים חינוכיים</h2>
+                <p>למידה חווייתית דרך משחק</p>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-dice"></i></div>
+                    <h3>משחקי חשבון</h3>
+                    <p>משחקים מהנים לפיתוח חשיבה מתמטית</p>
+                    <div class="link"><a href="../../projects-js/math/math.html" target="_blank"> <i class="fas fa-dice"></i> משחק חשבון</a></div>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-spell-check"></i></div>
+                    <h3>משחקי שפה</h3>
+                    <p>משחקים לפיתוח אוצר מילים והבנת הנקרא</p>
+
+                    <div class="link"> <a href="../../projects-js/wordAndSynonym/wordAndSynonym.html" target="_blank"> <i class="fas fa-dice"></i> משחק מילים ונרדפים </a></div>
+                  
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-memory"></i></div>
+                    <h3>משחקי זיכרון</h3>
+                    <p>פעילויות לשיפור הזיכרון והריכוז</p>
+                    <div class="link"> <a href="../../projects-js/memory-game/memoryGame.html" target="_blank"> <i class="fas fa-dice"></i>  משחקי מילים - זיכרון ומילים נרדפות</a></div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="content">
+            <div class="section-header">
+                <h2>אודות המרכז</h2>
+                <p>צוות מקצועי עם ניסיון רב בחינוך</p>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-star"></i></div>
+                    <h3>ניסיון</h3>
+                    <p>צוות המורים שלנו מביא איתו ניסיון של מעל 25 שנה בהוראה</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-heart"></i></div>
+                    <h3>גישה אישית</h3>
+                    <p>אנו מאמינים בהתאמה אישית של תכנית הלימודים לכל תלמיד</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-award"></i></div>
+                    <h3>מצוינות</h3>
+                    <p>מחויבים למצוינות ולהצלחת כל תלמיד ותלמידה</p>
+                </div>
+            </div>
+        </section>
+    </main>
+<footer>
+    <p>&copy; 2024 מרכז לימוד אלעימד | כל הזכויות שמורות</p>
+    <div class="social-contact">
+        <a href="https://www.instagram.com/yourpage" target="_blank" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/yourpage" target="_blank" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="tel:0527552988" aria-label="Phone">
+            <i class="fas fa-phone"></i>
+        </a>
+    </div>
+</footer>
+
+</body>
+
+</html>

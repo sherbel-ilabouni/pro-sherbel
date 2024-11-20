@@ -1,0 +1,43 @@
+
+/* Reset & Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f4f6f8;
+    text-align: center;
+    direction: rtl;
+    line-height: 1.6;
+}
+
+.modal {
+    margin-bottom: 230px;
+}
+
+.terms-content h2,
+.modal-content h2 {
+    font-size: 2.5rem;
+    color: #1976D2;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.terms-content p,
+.modal-content p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.terms-content p::before,
+.modal-content p::before {
+    content: "• ";
+    color: #1976D2;
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin-right: 5px;
+}

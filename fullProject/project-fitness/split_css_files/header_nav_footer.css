@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+/* Header Styles */
+
+.header {
+    background-color: #2196F3;
+    padding: 20px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header .brand {
+    font-family: "Satisfy", serif;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.header .sub-header {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Navigation Menu */
+.nav-menu {
+    background-color: #1976D2;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Footer Links */
+.footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    font-size: 1rem;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #2196F3;
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+    .header .brand {
+        font-size: 2rem;
+    }
+
+    .header .sub-header {
+        font-size: 1rem;
+    }
+
+    .nav-menu {
+        flex-wrap: wrap;
+        padding: 10px;
+    }
+
+    .nav-menu a {
+        margin: 5px;
+        padding: 10px 15px;
+    }
+
+
+
+    .footer-links a {
+        margin: 0 10PX;
+    }
+}

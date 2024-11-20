@@ -1,0 +1,94 @@
+#popup-contact {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding: 20px;
+    background: linear-gradient(235deg, #3498db, #2ecc71);
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    text-align: center;
+}
+
+#popup-contact h2 {
+    margin-bottom: 15px;
+    font-size: 32px;
+    color: #333;
+}
+
+.popup-label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #000000;
+    text-align: right;
+}
+
+.popup-input,
+.popup-textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 10px;
+    background: #f0f0f0;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.popup-input:focus,
+.popup-textarea:focus {
+    background: #e8e8e8;
+    box-shadow: 0 0 5px #007bff;
+}
+
+.popup-textarea {
+    height: 80px;
+    resize: none;
+}
+
+.popup-button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(145deg, #007bff, #0056b3);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.popup-button:hover {
+    background: linear-gradient(145deg, #0056b3, #007bff);
+}
+
+#close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+#close-popup:hover {
+    color: #ff0000;
+}
+@media (max-width: 700px) {
+#popup-contact{
+    width:75%;
+}
+
+}

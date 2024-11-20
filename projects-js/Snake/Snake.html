@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Snake</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="Script.js" defer></script>
+</head>
+
+<body>
+    <div class="stars" id="stars"></div>
+
+    <div id="game-container">
+        <div class="score-board">
+            <div class="score-item">
+                <span class="score-label">SCORE</span>
+                <span class="score-value" id="score">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">HIGH SCORE</span>
+                <span class="score-value" id="highScore">0</span>
+            </div>
+        </div>
+
+        <button id="start-button" onclick="startGame()">Start Game</button>
+
+        <div class="controls">
+            <button class="speed-button easy" onclick="setSpeed(200)">Easy</button>
+            <button class="speed-button medium" onclick="setSpeed(100)">Medium</button>
+            <button class="speed-button hard" onclick="setSpeed(50)">Hard</button>
+        </div>
+
+        <div id="game-board"></div>
+    </div>
+
+   
+</body>
+
+</html>

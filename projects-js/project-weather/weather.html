@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מזג אוויר עולמי עם מפה</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="glass-select">
+            <label class="select-label">בחר מדינה</label>
+            <select id="countrySelect">
+                <option value="">בחר מדינה</option>
+            </select>
+        </div>
+
+        <div class="grid-layout">
+            <div class="weather-card">
+                <div class="weather-header">
+                    <div class="location-info">
+                        <div class="flag" id="countryFlag">🌍</div>
+                        <div>
+                            <div class="location-name" id="locationName">בחר מדינה</div>
+                            <div class="current-time" id="localTime">--:--</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="temperature-display">
+                    <div id="weatherIcon" style="font-size: 3rem; margin-bottom: 1rem;">⛅</div>
+                    <div class="temp-value" id="temperature">--°</div>
+                    <div id="weatherCondition" style="font-size: 1.2rem; opacity: 0.9">--</div>
+                </div>
+
+                <div class="weather-details">
+                    <div class="weather-detail-item">
+                        <div class="detail-value" id="humidity">--%</div>
+                        <div class="detail-label">לחות באוויר</div>
+                        <div class="detail-help">אחוז אדי המים באוויר</div>
+                    </div>
+                    <div class="weather-detail-item">
+                        <div class="detail-value" id="windSpeed">-- קמ"ש</div>
+                        <div class="detail-label">מהירות רוח</div>
+                    </div>
+                    <div class="weather-detail-item">
+                        <div class="detail-value" id="rainfall">-- מ"מ</div>
+                        <div class="detail-label">כמות גשם</div>
+                        <div class="detail-help">מילימטרים של גשם</div>
+                    </div>
+                    <div class="weather-detail-item">
+                        <div class="detail-value" id="feelsLike">--°</div>
+                        <div class="detail-label">מרגיש כמו</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js">    </script>
+    <script src="Script.js"> </script>
+</body>
+
+</html>

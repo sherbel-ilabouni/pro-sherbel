@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>משחקי מילים - זיכרון ומילים נרדפות</title>
+   <link rel="stylesheet" href="style.css">
+   <script src="Script.js" defer></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="game-header">
+            <h1>משחקי מילים - זיכרון ומילים נרדפות</h1>
+        </div>
+
+        <div class="mode-switch">
+            <button class="mode-btn active" onclick="switchGame('memory')" id="memoryBtn">משחק זיכרון</button>
+            <button class="mode-btn" onclick="switchGame('synonyms')" id="synonymsBtn">מילים נרדפות</button>
+        </div>
+
+        <div id="memoryGame" class="game memory-game">
+            <div class="controls">
+                <select class="level-select" id="memoryLevelSelect" onchange="changeMemoryLevel()">
+                    <option value="1">רמה 1 - קל (כיתה א-ב)</option>
+                    <option value="2">רמה 2 - בינוני (כיתה ג-ד)</option>
+                    <option value="3">רמה 3 - קשה (כיתה ה-ו)</option>
+                </select>
+                <div class="score-display">ניקוד: <span id="memoryScore">0</span></div>
+                <div class="moves-display">מהלכים: <span id="memoryMoves">0</span></div>
+                <div class="timer">זמן: <span id="memoryTimer">00:00</span></div>
+            </div>
+            <div class="level-info" id="memoryLevelInfo"></div>
+            <div class="game-grid" id="memoryGrid"></div>
+        </div>
+
+        <div id="synonymGame" class="game synonyms-game" style="display: none;">
+            <div class="controls">
+                <select class="level-select" id="synonymLevelSelect" onchange="changeSynonymLevel()">
+                    <option value="1">רמה 1 - קל (כיתה א-ב)</option>
+                    <option value="2">רמה 2 - בינוני (כיתה ג-ד)</option>
+                    <option value="3">רמה 3 - קשה (כיתה ה-ו)</option>
+                </select>
+                <div class="score-display">ניקוד: <span id="synonymScore">0</span></div>
+                <div class="moves-display">מהלכים: <span id="synonymMoves">0</span></div>
+                <div class="timer">זמן: <span id="synonymTimer">00:00</span></div>
+            </div>
+            <div class="level-info" id="synonymLevelInfo"></div>
+            <div class="synonyms-grid" id="synonymsContainer"></div>
+        </div>
+    </div>
+</body>
+
+</html>

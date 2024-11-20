@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="he">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>שאלון - תפריט מותאם אישית</title>
+    <link rel="stylesheet" href="split_css_files/questionnaire.css">
+    <link rel="stylesheet" href="split_css_files/header_nav_footer.css">
+    
+</head>
+
+<body>
+    <div class="header">
+        <div class="brand">FITNESS</div>
+        <div class="sub-header">תפריטי תזונה מותאמים אישית</div>
+    </div>
+
+    <div class="nav-menu">
+        <a href="index.html#home">דף הבית</a>
+        <a style="background-color:  #2196F3;" href="questionnaire.html">לפנית תפריט</a>
+        <a href="about.html">אודות</a>
+        <a href="results.html">תוצאות</a>
+        <a href="contact.html">צור קשר</a>
+    </div>
+    <div class="container" id="questionContainer">
+        <div class="status-bar" id="statusBar"></div>
+        <p id="questionText" class="question"></p>
+        <div id="inputContainer" class="buttons"></div>
+        <button class="back-button" onclick="previousQuestion()" id="backButton" style="display: none;">חזרה לשאלה
+            קודמת</button>
+        <div class="calories-display" id="caloriesDisplay" style="display: none;"></div>
+
+
+    </div>
+    <footer class="footer-links">
+        <a href="terms.html">תקנון</a> |
+        <a href="privacy.html">מדיניות פרטיות</a> |
+        <a href="contact.html">צור קשר</a>
+    </footer>
+    <script src="Scripte.js"></script>
+</body>
+
+</html>

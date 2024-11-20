@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="he">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>צור קשר</title>
+    <link rel="stylesheet" href="split_css_files/contact.css">
+    <link rel="stylesheet" href="split_css_files/header_nav_footer.css">
+</head>
+
+<body>
+    <div class="header">
+        <div class="brand">FITNESS</div>
+        <div class="sub-header">תפריטי תזונה מותאמים אישית</div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <div class="nav-menu">
+        <a href="index.html#home">דף הבית</a>
+        <a href="questionnaire.html">לפנית תפריט</a>
+        <a href="about.html">אודות</a>
+        <a href="results.html">תוצאות</a>
+        <a style="background-color:  #2196F3;" href="contact.html">צור קשר</a>
+    </div>
+    <div class="contact-section" id="contact">
+        <h2 class="contact-title">צור קשר</h2>
+        <p class="contact-subtitle">נשמח לענות על כל שאלה</p>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>פרטי התקשרות</h3>
+                <div class="contact-details">
+                    <p><i class="contact-icon">📞</i>טלפון: 03-1234567</p>
+                    <p><i class="contact-icon">📧</i>אימייל: info@dash.co.il</p>
+                    <p><i class="contact-icon">📍</i>כתובת: רחוב הרצל 100, תל אביב</p>
+                    <p><i class="contact-icon">🕒</i>שעות פעילות: א'-ה' 09:00-19:00</p>
+                </div>
+            </div>
+            <form class="contact-form">
+                <div class="form-group">
+                    <input type="text" placeholder="שם מלא" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="אימייל" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="טלפון" required>
+                </div>
+                <div class="form-group">
+                    <select required>
+                        <option value="" disabled selected>נושא הפנייה</option>
+                        <option value="general">שאלה כללית</option>
+                        <option value="support">תמיכה טכנית</option>
+                        <option value="business">שיתוף פעולה עסקי</option>
+                        <option value="other">אחר</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="תוכן ההודעה" required></textarea>
+                </div>
+                <button type="submit">שליחה</button>
+            </form>
+        </div>
+        <div class="map-container">
+            <h3 class="map-subtitle">המיקום שלנו</h3>
+            <div class="map-wrapper">
+                <iframe src="https://www.google.com/maps/embed?..." style="border:0;"
+                    allowfullscreen=""></iframe>
+            </div>
+        </div>
+    </div>
+    <footer class="footer-links">
+        <a href="terms.html">תקנון</a> |
+        <a href="privacy.html">מדיניות פרטיות</a> |
+        <a href="contact.html">צור קשר</a>
+    </footer>
+
+</body>
+
+</html>

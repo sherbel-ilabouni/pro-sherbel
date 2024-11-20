@@ -1,0 +1,145 @@
+ body {
+     font-family: Arial, sans-serif;
+     background-color: #1a1a1a;
+     color: #ffffff;
+     margin: 0;
+     padding: 0;
+ }
+
+ .container {
+     max-width: 800px;
+     margin: 0 auto;
+     padding: 20px;
+ }
+
+ header {
+     text-align: center;
+     margin-bottom: 30px;
+
+ }
+
+ .logo {
+     font-size: 48px;
+     font-weight: bold;
+     color: #ff6600;
+ }
+
+ .subtitle {
+     font-size: 24px;
+     color: #cccccc;
+ }
+
+ .info-buttons {
+     display: flex;
+     justify-content: space-around;
+     margin-bottom: 20px;
+ }
+
+ .info-button {
+     background-color: #ff6600;
+     color: #ffffff;
+     border: none;
+     padding: 10px 20px;
+     border-radius: 4px;
+     cursor: pointer;
+     font-size: 16px;
+ }
+
+ .info-section {
+     background-color: #333333;
+     padding: 20px;
+     border-radius: 8px;
+     margin-bottom: 20px;
+     display: none;
+ }
+
+ .contact-form {
+     background-color: #333333;
+     padding: 20px;
+     border-radius: 8px;
+ }
+
+ .form-group {
+     margin-bottom: 15px;
+ }
+
+ label {
+     display: block;
+     margin-bottom: 5px;
+ }
+
+ input,
+ textarea,
+ select {
+     width: 100%;
+     padding: 8px;
+     border: 1px solid #555555;
+     border-radius: 4px;
+     background-color: #444444;
+     color: #ffffff;
+     resize: none;
+ }
+
+ button[type="submit"] {
+     background-color: #ff6600;
+     color: #ffffff;
+     border: none;
+     padding: 10px 20px;
+     border-radius: 4px;
+     cursor: pointer;
+ }
+
+ @media (max-width: 1000px) {
+     .container {
+         max-width: 90%;
+     }
+
+     .logo {
+         font-size: 36px;
+     }
+
+     .subtitle {
+         font-size: 20px;
+     }
+
+     .info-buttons {
+         flex-direction: column;
+         align-items: center;
+     }
+
+     .info-button {
+         margin-bottom: 10px;
+         width: 80%;
+     }
+ }
+
+ @media (max-width: 760px) {
+     .container {
+         max-width: 95%;
+         padding: 10px;
+     }
+
+     .logo {
+         font-size: 28px;
+     }
+
+     .subtitle {
+         font-size: 18px;
+     }
+
+     .info-button {
+         width: 100%;
+         font-size: 14px;
+     }
+
+     .info-section,
+     .contact-form {
+         padding: 15px;
+     }
+
+     input,
+     textarea,
+     select {
+         font-size: 14px;
+     }
+ }

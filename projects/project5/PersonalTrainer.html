@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מאמן אישי - מידע ויצירת קשר</title>
+   <link rel="stylesheet" href="style/PersonalTrainer.css">
+</head>
+
+<body>
+   
+    <div class="container">
+        <header>
+            <div class="logo">SH</div>
+            <div class="subtitle">מאמן אישי</div>
+        </header>
+        <main>
+            <div class="info-buttons">
+                <button class="info-button" onclick="showInfo('personal')">אימון אישי</button>
+                <button class="info-button" onclick="showInfo('couple')">אימון זוגי</button>
+            </div>
+
+            <section id="personal-info" class="info-section">
+                <h2>אימון אישי</h2>
+                <p>אימון אישי הוא דרך מצוינת להשיג את יעדי הכושר והבריאות שלך. הנה כמה יתרונות של אימון אישי:</p>
+                <ul>
+                    <li>תוכנית אימונים מותאמת אישית לצרכים ויעדים שלך</li>
+                    <li>ליווי צמוד ומקצועי לאורך כל הדרך</li>
+                    <li>שיפור טכניקה ומניעת פציעות</li>
+                    <li>מוטיבציה וקביעת יעדים ריאליים</li>
+                    <li>גמישות בזמנים ומיקום האימונים</li>
+                </ul>
+                <p>באימון אישי נעבוד יחד כדי לבנות תוכנית שתתאים בדיוק לאורח החיים, היכולות והשאיפות שלך.</p>
+            </section>
+
+            <section id="couple-info" class="info-section">
+                <h2>אימון זוגי</h2>
+                <p>אימון זוגי מציע הזדמנות ייחודית לחזק את הקשר ביניכם תוך כדי שיפור הבריאות והכושר. יתרונות האימון
+                    הזוגי כוללים:</p>
+                <ul>
+                    <li>מוטיבציה משותפת: תמיכה הדדית לעמידה ביעדים</li>
+                    <li>זמן איכות: בניית חוויות משותפות חיוביות</li>
+                    <li>תקשורת משופרת: עבודת צוות מחזקת את הקשר</li>
+                    <li>יעילות: אימונים מותאמים אישית לשניכם</li>
+                    <li>כיף: הפיכת האימון לחוויה מהנה ומשותפת</li>
+                </ul>
+                <p>באימון זוגי נתאים תוכנית שתענה על הצרכים של שניכם, תוך התחשבות ביכולות והעדפות של כל אחד.</p>
+            </section>
+
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">שם:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">אימייל:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">מספר טלפון:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="training-type">סוג אימון מבוקש:</label>
+                    <select id="training-type" name="training-type" required>
+                        <option value="">בחר סוג אימון</option>
+                        <option value="personal">אימון אישי</option>
+                        <option value="couple">אימון זוגי</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">הודעה:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                </div>
+                <button type="submit">שלח</button>
+            </form>
+        </main>
+    </div>
+
+    <script>
+        function showInfo(type) {
+            document.getElementById('personal-info').style.display = 'none';
+            document.getElementById('couple-info').style.display = 'none';
+            document.getElementById(type + '-info').style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>

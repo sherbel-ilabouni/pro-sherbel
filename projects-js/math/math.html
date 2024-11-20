@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="he">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>משחקי מתמטיקה</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- כפתורי החלפת משחק -->
+    <div class="game-switcher">
+        <button class="switch-btn active" data-game="math">תרגילי חשבון</button>
+        <button class="switch-btn" data-game="sequence">סדרות מספרים</button>
+        <button class="switch-btn" data-game="comparison">השוואת מספרים</button>
+    </div>
+
+    <!-- משחק תרגילי חשבון -->
+    <div id="math-game" class="game-section active">
+        <div class="game-container">
+            <aside class="sidebar">
+                <h2>סוג משחק</h2>
+                <div class="game-types">
+                    <button class="game-type-btn active" data-type="regular">תרגילים רגילים</button>
+                </div>
+
+                <h2>פעולות חשבון</h2>
+                <div class="operations">
+                    <button class="operation-btn active" data-operation="+">חיבור</button>
+                    <button class="operation-btn" data-operation="-">חיסור</button>
+                    <button class="operation-btn" data-operation="×">כפל</button>
+                    <button class="operation-btn" data-operation="÷">חילוק</button>
+                </div>
+            </aside>
+
+            <main class="main-content">
+                <h1>משחק חשבון</h1>
+
+                <div class="levels">
+                    <button class="level-btn active" data-level="1">רמה 1</button>
+                    <button class="level-btn" data-level="2">רמה 2</button>
+                    <button class="level-btn" data-level="3">רמה 3</button>
+                    <button class="level-btn" data-level="4">רמה 4</button>
+                    <button class="level-btn" data-level="5">רמה 5</button>
+                </div>
+
+                <div id="math-score-display" class="score-display"></div>
+
+                <div class="exercise-container">
+                    <div class="exercise"></div>
+                </div>
+
+                <div class="game-buttons">
+                    <button id="math-check">בדוק תשובה</button>
+                    <button id="math-next">תרגיל הבא</button>
+                </div>
+
+                <div id="math-message" class="message"></div>
+            </main>
+        </div>
+    </div>
+
+    <!-- משחק סדרות מספרים -->
+    <div id="sequence-game" class="game-section">
+        <div class="game-container">
+            <aside class="sidebar">
+                <h2>סוג סדרה</h2>
+                <div class="sequence-types">
+                    <button class="sequence-type-btn active" data-type="descending">סדרה יורדת</button>
+                    <button class="sequence-type-btn" data-type="geometric">סדרה גיאומטרית</button>
+                </div>
+            </aside>
+
+            <main class="main-content">
+                <h1>סדרות מספרים</h1>
+
+                <div class="levels">
+                    <button class="level-btn active" data-level="1">רמה 1</button>
+                    <button class="level-btn" data-level="2">רמה 2</button>
+                    <button class="level-btn" data-level="3">רמה 3</button>
+                    <button class="level-btn" data-level="4">רמה 4</button>
+                    <button class="level-btn" data-level="5">רמה 5</button>
+                </div>
+
+                <div id="sequence-score-display" class="score-display"></div>
+
+                <div class="sequence-container">
+                    <div class="sequence">
+                        <div class="levels">
+                            <button class="level-btn active" data-level="1">רמה 1</button>
+                            <button class="level-btn" data-level="2">רמה 2</button>
+                            <button class="level-btn" data-level="3">רמה 3</button>
+                            <button class="level-btn" data-level="4">רמה 4</button>
+                            <button class="level-btn" data-level="5">רמה 5</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-buttons">
+                    <button id="sequence-check">בדוק תשובה</button>
+                    <button id="sequence-next">סדרה הבאה</button>
+                </div>
+
+                <div id="sequence-message" class="message"></div>
+            </main>
+        </div>
+    </div>
+    <!-- משחק השוואת מספרים -->
+    <div id="comparison-game" class="game-section">
+        <div class="game-container">
+
+
+
+            <main class="main-content">
+                <h1>השוואת מספרים</h1>
+
+                <h2>רמה השוואה</h2>
+                <div class="levels">
+                    <button class="level-btn active" data-level="1">רמה 1</button>
+                    <button class="level-btn" data-level="2">רמה 2</button>
+                    <button class="level-btn" data-level="3">רמה 3</button>
+                    <button class="level-btn" data-level="4">רמה 4</button>
+                    <button class="level-btn" data-level="5">רמה 5</button>
+                </div>
+                <div id="comparison-score-display" class="score-display">
+
+                </div>
+
+                <div class="comparison-container">
+                    <div class="comparison"></div>
+                </div>
+
+                <div class="game-buttons">
+                    <button id="comparison-check">בדוק תשובה</button>
+                    <button id="comparison-next">שאלה הבאה</button>
+                </div>
+
+                <div id="comparison-message" class="message"></div>
+            </main>
+        </div>
+    </div>
+
+
+    <script src="Script.js"></script>
+</body>
+
+</html>
