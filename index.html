@@ -9,10 +9,15 @@
     <link rel="stylesheet" href="style/index.css">
     <link rel="stylesheet" href="style/index1.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <script src="script/script.js" defer></script>
     <script src="script/scriptDOM.js" defer></script>
     <script src="script/scriptpOpup.js" defer></script>
+    <script src="script/email.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        emailjs.init("FLWKm9dNRHcfp1cRn"); // המפתח הציבורי שלך
+    </script>
 </head>
+
 <body>
     <div class="container">
         <div class="img-name">
@@ -346,19 +351,19 @@
                 ברשג.</p>
 
             <form id="contactForm">
-                <label for="fullName" class="form-label">:שם</label>
-                <input class="form-control" type="text" id="fullName" required />
+                <label for="name" class="form-label">:שם</label>
+                <input class="form-control" type="text" id="name" name="user_name" required />
 
                 <label for="email" class="form-label">:אימייל</label>
-                <input class="form-control" type="email" id="email" required />
+                <input class="form-control" type="email" id="email" name="user_email" required />
 
                 <label for="phoneNumber" class="form-label">:טלפון</label>
-                <input class="form-control" type="tel" id="phoneNumber" required />
+                <input class="form-control" type="tel" id="phoneNumber" name="phoneNumber" required />
 
                 <label for="message" class="form-label">:הודעה</label>
-                <textarea class="form-control" id="message" required></textarea>
+                <textarea class="form-control" id="message" name="message" required></textarea>
 
-                <button type="submit" class="btn">שליחה</button>
+                <button type="button" class="btn">שליחה</button>
             </form>
         </div>
 
