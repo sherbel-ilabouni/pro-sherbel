@@ -347,7 +347,10 @@ div.contact {
 
 .form h2 {
     font-size: 1.8rem;
+    color: #2ecc71;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-shadow: 2px 4px 15px rgb(52, 152, 219) ;
+    
 }
 
 .form p {
