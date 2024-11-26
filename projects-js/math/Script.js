@@ -1,531 +1,395 @@
-// משתנים גלובליים משותפים
 let currentGame = "math";
 
-// משתנים למשחק המתמטיקה
-let mathNum1, mathNum2;
-let mathCurrentLevel = 1;
-let mathCurrentOperation = "+";
-let mathQuestionsCount = 0;
-let mathCorrectAnswers = 0;
-let mathWrongAnswers = 0;
-let mathWrongQuestions = [];
+// משתנים למשחקים
+const gameStates = {
+  math: {
+    num1: 0,
+    num2: 0,
+    level: 1,
+    operation: "+",
+    questionsCount: 0,
+    correctAnswers: 0,
+    wrongAnswers: 0,
+    wrongQuestions: []
+  },
+  sequence: {
+    level: 1,
+    type: "descending",
+    questionsCount: 0,
+    correctAnswers: 0,
+    wrongAnswers: 0,
+    currentSequence: [],
+    correctAnswer: null,
+    wrongQuestions: []
+  },
+  comparison: {
+    num1: 0,
+    num2: 0,
+    correctSymbol: null,
+    level: 1,
+    questionsCount: 0,
+    correctAnswers: 0,
+    wrongAnswers: 0
+  }
+};
 
-// משתנים למשחק הסדרות
-let sequenceCurrentLevel = 1;
-let sequenceCurrentType = "descending";
-let sequenceQuestionsCount = 0;
-let sequenceCorrectAnswers = 0;
-let sequenceWrongAnswers = 0;
-let currentSequence = [];
-let sequenceCorrectAnswer;
-let sequenceWrongQuestions = [];
-
-// משתנים למשחק השוואת מספרים
-let comparisonNum1, comparisonNum2, comparisonCorrectSymbol;
-let comparisonCurrentLevel = 1;
-let comparisonQuestionsCount = 0;
-let comparisonCorrectAnswers = 0;
-let comparisonWrongAnswers = 0;
-
-// טווחי מספרים למשחק המתמטיקה
-const mathLevelRanges = {
-  "+": {
+// טווחי מספרים למשחקים
+const ranges = {
+  math: {
+    "+": {
+      1: { min: 1, max: 10 },
+      2: { min: 1, max: 20 },
+      3: { min: 1, max: 50 },
+      4: { min: 1, max: 100 },
+      5: { min: 1, max: 200 }
+    },
+    "-": {
+      1: { min: 1, max: 10 },
+      2: { min: 1, max: 20 },
+      3: { min: 1, max: 50 },
+      4: { min: 1, max: 100 },
+      5: { min: 1, max: 200 }
+    },
+    "×": {
+      1: { min: 1, max: 5 },
+      2: { min: 1, max: 10 },
+      3: { min: 1, max: 12 },
+      4: { min: 1, max: 15 },
+      5: { min: 1, max: 20 }
+    },
+    "÷": {
+      1: { min: 1, max: 5 },
+      2: { min: 1, max: 10 },
+      3: { min: 1, max: 12 },
+      4: { min: 1, max: 15 },
+      5: { min: 1, max: 20 }
+    }
+  },
+  sequence: {
+    descending: {
+      1: { start: 20, diff: 2 },
+      2: { start: 50, diff: 3 },
+      3: { start: 100, diff: 5 },
+      4: { start: 200, diff: 7 },
+      5: { start: 500, diff: 10 }
+    }
+  },
+  comparison: {
     1: { min: 1, max: 10 },
-    2: { min: 1, max: 20 },
-    3: { min: 1, max: 50 },
-    4: { min: 1, max: 100 },
-    5: { min: 1, max: 200 },
-  },
-  "-": {
-    1: { min: 1, max: 10 },
-    2: { min: 1, max: 20 },
-    3: { min: 1, max: 50 },
-    4: { min: 1, max: 100 },
-    5: { min: 1, max: 200 },
-  },
-  "×": {
-    1: { min: 1, max: 5 },
-    2: { min: 1, max: 10 },
-    3: { min: 1, max: 12 },
-    4: { min: 1, max: 15 },
-    5: { min: 1, max: 20 },
-  },
-  "÷": {
-    1: { min: 1, max: 5 },
-    2: { min: 1, max: 10 },
-    3: { min: 1, max: 12 },
-    4: { min: 1, max: 15 },
-    5: { min: 1, max: 20 },
-  },
+    2: { min: 1, max: 50 },
+    3: { min: 1, max: 100 },
+    4: { min: 1, max: 200 },
+    5: { min: 1, max: 500 }
+  }
 };
 
-// טווחי מספרים למשחק הסדרות
-const sequenceLevelRanges = {
-  descending: {
-    1: { start: 20, diff: 2 },
-    2: { start: 50, diff: 3 },
-    3: { start: 100, diff: 5 },
-    4: { start: 200, diff: 7 },
-    5: { start: 500, diff: 10 },
-  },
-  geometric: {
-    1: { start: 64, ratio: 2 },
-    2: { start: 128, ratio: 2 },
-    3: { start: 243, ratio: 3 },
-    4: { start: 625, ratio: 5 },
-    5: { start: 1024, ratio: 4 },
-  },
+const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+const updateScore = (gameType) => {
+  const state = gameStates[gameType];
+  document.getElementById(`${gameType}-score-display`).textContent = 
+    `תשובות נכונות: ${state.correctAnswers} מתוך ${state.questionsCount}`;
 };
 
-// טווחי מספרים למשחק השוואת מספרים
-const comparisonLevelRanges = {
-  1: { min: 1, max: 10 },
-  2: { min: 1, max: 50 },
-  3: { min: 1, max: 100 },
-  4: { min: 1, max: 200 },
-  5: { min: 1, max: 500 },
+const showMessage = (gameType, text, isCorrect) => {
+  const messageDiv = document.getElementById(`${gameType}-message`);
+  messageDiv.textContent = text;
+  messageDiv.className = isCorrect ? "correct" : "incorrect";
 };
 
-// פונקציות עזר
-function getRandomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 function generateMathQuestion() {
-  const range = mathLevelRanges[mathCurrentOperation][mathCurrentLevel];
+  const state = gameStates.math;
+  const range = ranges.math[state.operation][state.level];
 
-  if (mathCurrentOperation === "÷") {
-    mathNum2 = getRandomNumber(range.min, range.max);
+  if (state.operation === "÷") {
+    state.num2 = getRandomNumber(range.min, range.max);
     const result = getRandomNumber(range.min, range.max);
-    mathNum1 = mathNum2 * result;
+    state.num1 = state.num2 * result;
   } else {
-    mathNum1 = getRandomNumber(range.min, range.max);
-    mathNum2 = getRandomNumber(range.min, range.max);
-
-    if (mathCurrentOperation === "-" && mathNum2 > mathNum1) {
-      [mathNum1, mathNum2] = [mathNum2, mathNum1];
+    state.num1 = getRandomNumber(range.min, range.max);
+    state.num2 = getRandomNumber(range.min, range.max);
+    if (state.operation === "-" && state.num2 > state.num1) {
+      [state.num1, state.num2] = [state.num2, state.num1];
     }
   }
 
   document.querySelector(".exercise").innerHTML = `
-        <div class="exercise-content">
-            <input type="number" id="answer" class="regular-input">
-            <span class="equals">=</span>
-            <span class="expression">${mathNum1} <span id="op">${mathCurrentOperation}</span> ${mathNum2}</span>
-        </div>
-    `;
+    <div class="exercise-content">
+      <input type="number" id="answer" class="regular-input">
+      <span class="equals">=</span>
+      <span class="expression">${state.num1} <span id="op">${state.operation}</span> ${state.num2}</span>
+    </div>
+  `;
   document.getElementById("answer").focus();
 }
+
 function checkMathAnswer() {
+  const state = gameStates.math;
   const userAnswer = parseInt(document.getElementById("answer").value);
 
   if (isNaN(userAnswer)) {
-    document.getElementById("math-message").textContent = "נא להזין מספר";
-    document.getElementById("math-message").className = "incorrect";
+    showMessage("math", "נא להזין מספר", false);
     return;
   }
 
-  let correctAnswer;
-  switch (mathCurrentOperation) {
-    case "+":
-      correctAnswer = mathNum1 + mathNum2;
-      break;
-    case "-":
-      correctAnswer = mathNum1 - mathNum2;
-      break;
-    case "×":
-      correctAnswer = mathNum1 * mathNum2;
-      break;
-    case "÷":
-      correctAnswer = mathNum1 / mathNum2;
-      break;
-  }
+  const operations = {
+    "+": (a, b) => a + b,
+    "-": (a, b) => a - b,
+    "×": (a, b) => a * b,
+    "÷": (a, b) => a / b
+  };
 
-  handleMathAnswer(userAnswer === correctAnswer, userAnswer, correctAnswer);
-}
-
-function handleMathAnswer(isCorrect, userAnswer, correctAnswer) {
-  const messageDiv = document.getElementById("math-message");
+  const correctAnswer = operations[state.operation](state.num1, state.num2);
+  const isCorrect = userAnswer === correctAnswer;
 
   if (isCorrect) {
-    messageDiv.textContent = "כל הכבוד! התשובה נכונה";
-    messageDiv.className = "correct";
-    mathCorrectAnswers++;
+    showMessage("math", "כל הכבוד! התשובה נכונה", true);
+    state.correctAnswers++;
     setTimeout(generateMathQuestion, 1500);
   } else {
-    messageDiv.textContent = `תשובה שגויה. התשובה הנכונה היא ${correctAnswer}`;
-    messageDiv.className = "incorrect";
-    mathWrongAnswers++;
-    mathWrongQuestions.push({
+    showMessage("math", `תשובה שגויה. התשובה הנכונה היא ${correctAnswer}`, false);
+    state.wrongAnswers++;
+    state.wrongQuestions.push({
       question: document.querySelector(".exercise").innerHTML,
-      correctAnswer: correctAnswer,
-      userAnswer: userAnswer,
+      correctAnswer,
+      userAnswer
     });
   }
 
-  mathQuestionsCount++;
-  updateMathScore();
+  state.questionsCount++;
+  updateScore("math");
 
-  if (mathQuestionsCount >= 25) {
+  if (state.questionsCount >= 25) {
     setTimeout(() => showSummary("math"), 1000);
   }
 }
 
-// פונקציות למשחק הסדרות
 function generateSequence() {
-  const range = sequenceLevelRanges[sequenceCurrentType][sequenceCurrentLevel];
-  currentSequence = [];
+  const state = gameStates.sequence;
+  const range = ranges.sequence[state.type][state.level];
+  
+  const startNum = getRandomNumber(range.start / 2, range.start * 1.5);
+  let current = startNum;
+  state.currentSequence = [];
 
-  if (sequenceCurrentType === "descending") {
-    // מגריל מספר התחלתי בטווח מתאים לרמה
-    const startNum = getRandomNumber(range.start / 2, range.start * 1.5);
-    let current = startNum;
-
-    // יצירת סדרה יורדת עם הפרש רנדומלי
-    const diff = getRandomNumber(range.diff, range.diff * 2);
-    for (let i = 0; i < 5; i++) {
-      currentSequence.push(current);
-      current -= diff;
-    }
-  } else {
-    // geometric
-    // מגריל מספר התחלתי בטווח מתאים לרמה
-    const startNum = getRandomNumber(range.start / 2, range.start);
-    let current = startNum;
-
-    // יצירת סדרה גאומטרית עם יחס רנדומלי
-    const ratio = range.ratio;
-    for (let i = 0; i < 5; i++) {
-      currentSequence.push(Math.round(current)); // עיגול למספר שלם
-      current = current / ratio;
-    }
+  for (let i = 0; i < 5; i++) {
+    state.currentSequence.push(current);
+    current -= range.diff;
   }
 
   const hiddenIndex = Math.floor(Math.random() * 5);
-  sequenceCorrectAnswer = currentSequence[hiddenIndex];
+  state.correctAnswer = state.currentSequence[hiddenIndex];
 
-  const sequenceHTML = currentSequence
-    .map((num, index) => {
-      if (index === hiddenIndex) {
-        return `<input type="number" id="sequence-answer" class="sequence-input">`;
-      }
-      return `<span class="number">${num}</span>`;
-    })
+  const sequenceHTML = state.currentSequence
+    .map((num, index) => index === hiddenIndex ? 
+      '<input type="number" id="sequence-answer" class="sequence-input">' :
+      `<span class="number">${num}</span>`)
     .join(" , ");
 
   document.querySelector(".sequence").innerHTML = sequenceHTML;
   document.getElementById("sequence-answer")?.focus();
 }
+
 function checkSequenceAnswer() {
+  const state = gameStates.sequence;
   const userAnswer = parseInt(document.getElementById("sequence-answer").value);
 
   if (isNaN(userAnswer)) {
-    document.getElementById("sequence-message").textContent = "נא להזין מספר";
-    document.getElementById("sequence-message").className = "incorrect";
+    showMessage("sequence", "נא להזין מספר", false);
     return;
   }
 
-  handleSequenceAnswer(userAnswer === sequenceCorrectAnswer, userAnswer);
-}
-
-function handleSequenceAnswer(isCorrect, userAnswer) {
-  const messageDiv = document.getElementById("sequence-message");
+  const isCorrect = userAnswer === state.correctAnswer;
 
   if (isCorrect) {
-    messageDiv.textContent = "כל הכבוד! התשובה נכונה";
-    messageDiv.className = "correct";
-    sequenceCorrectAnswers++;
+    showMessage("sequence", "כל הכבוד! התשובה נכונה", true);
+    state.correctAnswers++;
     setTimeout(generateSequence, 1500);
   } else {
-    messageDiv.textContent = `תשובה שגויה. המספר הנכון הוא ${sequenceCorrectAnswer}`;
-    messageDiv.className = "incorrect";
-    sequenceWrongAnswers++;
-
-    sequenceWrongQuestions.push({
-      sequence: [...currentSequence],
-      correctAnswer: sequenceCorrectAnswer,
-      userAnswer: userAnswer,
+    showMessage("sequence", `תשובה שגויה. המספר הנכון הוא ${state.correctAnswer}`, false);
+    state.wrongAnswers++;
+    state.wrongQuestions.push({
+      sequence: [...state.currentSequence],
+      correctAnswer: state.correctAnswer,
+      userAnswer
     });
   }
 
-  sequenceQuestionsCount++;
-  updateSequenceScore();
+  state.questionsCount++;
+  updateScore("sequence");
 
-  if (sequenceQuestionsCount >= 25) {
+  if (state.questionsCount >= 25) {
     setTimeout(() => showSummary("sequence"), 1000);
   }
 }
-// פונקציה מעודכנת למשחק ההשוואה
-function generateComparisonQuestion() {
-  const range = comparisonLevelRanges[comparisonCurrentLevel];
-  comparisonNum1 = getRandomNumber(range.min, range.max);
-  comparisonNum2 = getRandomNumber(range.min, range.max);
 
-  comparisonCorrectSymbol =
-    comparisonNum1 < comparisonNum2
-      ? "<"
-      : comparisonNum1 > comparisonNum2
-      ? ">"
-      : "=";
+function generateComparisonQuestion() {
+  const state = gameStates.comparison;
+  const range = ranges.comparison[state.level];
+  
+  state.num1 = getRandomNumber(range.min, range.max);
+  state.num2 = getRandomNumber(range.min, range.max);
+  state.correctSymbol = state.num1 < state.num2 ? "<" : state.num1 > state.num2 ? ">" : "=";
 
   document.querySelector(".comparison").innerHTML = `
-        <div class="comparison-content">
-            <span class="number">${comparisonNum1}</span>
-            <span class="comparison-symbol">?</span>
-            <span class="number">${comparisonNum2}</span>
-        </div>
-        <div class="comparison-buttons">
-            <button class="comparison-symbol-btn" data-symbol="<">&lt;</button>
-            <button class="comparison-symbol-btn" data-symbol="=">=</button>
-            <button class="comparison-symbol-btn" data-symbol=">">&gt;</button>
-        </div>
-    `;
+    <div class="comparison-content">
+      <span class="number">${state.num1}</span>
+      <span class="comparison-symbol">?</span>
+      <span class="number">${state.num2}</span>
+    </div>
+    <div class="comparison-buttons">
+      <button class="comparison-symbol-btn" data-symbol="<">&lt;</button>
+      <button class="comparison-symbol-btn" data-symbol="=">=</button>
+      <button class="comparison-symbol-btn" data-symbol=">">&gt;</button>
+    </div>
+  `;
 
-  // הוספת מאזיני אירועים לכפתורי הסימנים
-  document.querySelectorAll(".comparison-symbol-btn").forEach((btn) => {
+  document.querySelectorAll(".comparison-symbol-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      const selectedSymbol = btn.dataset.symbol;
-      checkComparisonAnswer(selectedSymbol);
-
-      // הוספת אפקט ויזואלי לכפתור הנבחר
-      document
-        .querySelectorAll(".comparison-symbol-btn")
-        .forEach((b) => b.classList.remove("selected"));
+      document.querySelectorAll(".comparison-symbol-btn")
+        .forEach(b => b.classList.remove("selected"));
       btn.classList.add("selected");
+      checkComparisonAnswer(btn.dataset.symbol);
     });
   });
 }
 
 function checkComparisonAnswer(userAnswer) {
+  const state = gameStates.comparison;
+
   if (!userAnswer) {
-    document.getElementById("comparison-message").textContent =
-      "נא לבחור סימן השוואה";
-    document.getElementById("comparison-message").className = "incorrect";
+    showMessage("comparison", "נא לבחור סימן השוואה", false);
     return;
   }
 
-  const isCorrect = userAnswer === comparisonCorrectSymbol;
+  const isCorrect = userAnswer === state.correctSymbol;
 
-  const messageDiv = document.getElementById("comparison-message");
   if (isCorrect) {
-    messageDiv.textContent = "כל הכבוד! התשובה נכונה";
-    messageDiv.className = "correct";
-    comparisonCorrectAnswers++;
+    showMessage("comparison", "כל הכבוד! התשובה נכונה", true);
+    state.correctAnswers++;
     setTimeout(generateComparisonQuestion, 1500);
   } else {
-    messageDiv.textContent = `תשובה שגויה. הסימן הנכון הוא ${comparisonCorrectSymbol}`;
-    messageDiv.className = "incorrect";
-    comparisonWrongAnswers++;
+    showMessage("comparison", `תשובה שגויה. הסימן הנכון הוא ${state.correctSymbol}`, false);
+    state.wrongAnswers++;
   }
 
-  comparisonQuestionsCount++;
-  updateComparisonScore();
+  state.questionsCount++;
+  updateScore("comparison");
 
-  if (comparisonQuestionsCount >= 25) {
+  if (state.questionsCount >= 25) {
     setTimeout(() => showSummary("comparison"), 1000);
   }
 }
 
-// פונקציות עדכון ניקוד
-function updateMathScore() {
-  document.getElementById(
-    "math-score-display"
-  ).textContent = `תשובות נכונות: ${mathCorrectAnswers} מתוך ${mathQuestionsCount}`;
-}
-
-function updateSequenceScore() {
-  document.getElementById(
-    "sequence-score-display"
-  ).textContent = `תשובות נכונות: ${sequenceCorrectAnswers} מתוך ${sequenceQuestionsCount}`;
-}
-
-function updateComparisonScore() {
-  document.getElementById(
-    "comparison-score-display"
-  ).textContent = `תשובות נכונות: ${comparisonCorrectAnswers} מתוך ${comparisonQuestionsCount}`;
-}
-
-// פונקציית החלפת משחק
 function switchGame(gameType) {
   currentGame = gameType;
 
-  document.querySelectorAll(".game-section").forEach((section) => {
-    section.classList.remove("active");
-  });
-
+  document.querySelectorAll(".game-section").forEach(section => section.classList.remove("active"));
   document.getElementById(`${gameType}-game`).classList.add("active");
 
-  document.querySelectorAll(".switch-btn").forEach((btn) => {
-    btn.classList.remove("active");
-  });
-  document
-    .querySelector(`.switch-btn[data-game="${gameType}"]`)
-    .classList.add("active");
+  document.querySelectorAll(".switch-btn").forEach(btn => btn.classList.remove("active"));
+  document.querySelector(`.switch-btn[data-game="${gameType}"]`).classList.add("active");
 
-  if (gameType === "math") {
-    generateMathQuestion();
-  } else if (gameType === "sequence") {
-    generateSequence();
-  } else {
-    generateComparisonQuestion();
-  }
+  const generators = {
+    math: generateMathQuestion,
+    sequence: generateSequence,
+    comparison: generateComparisonQuestion
+  };
+
+  generators[gameType]();
 }
 
-// פונקציית הצגת סיכום
 function showSummary(gameType) {
-  const correctAnswers =
-    gameType === "math"
-      ? mathCorrectAnswers
-      : gameType === "sequence"
-      ? sequenceCorrectAnswers
-      : comparisonCorrectAnswers;
-  const questionsCount =
-    gameType === "math"
-      ? mathQuestionsCount
-      : gameType === "sequence"
-      ? sequenceQuestionsCount
-      : comparisonQuestionsCount;
-  const wrongAnswers =
-    gameType === "math"
-      ? mathWrongAnswers
-      : gameType === "sequence"
-      ? sequenceWrongAnswers
-      : comparisonWrongAnswers;
-
-  const percentage = Math.round((correctAnswers / questionsCount) * 100);
+  const state = gameStates[gameType];
+  const percentage = Math.round((state.correctAnswers / state.questionsCount) * 100);
 
   const summaryHTML = `
-        <div class="summary-popup">
-            <div class="summary-content">
-                <h2>סיכום המשחק</h2>
-                <div class="summary-stats">
-                    <p>מספר שאלות כולל: <span class="total-num">${questionsCount}</span></p>
-                    <p>תשובות נכונות: <span class="correct-num">${correctAnswers}</span></p>
-                    <p>תשובות שגויות: <span class="wrong-num">${wrongAnswers}</span></p>
-                    <p>אחוז הצלחה: <span class="percentage">${percentage}%</span></p>
-                </div>
-                <button onclick="resetGame('${gameType}')" class="reset-btn">משחק חדש</button>
-            </div>
+    <div class="summary-popup">
+      <div class="summary-content">
+        <h2>סיכום המשחק</h2>
+        <div class="summary-stats">
+          <p>מספר שאלות כולל: <span class="total-num">${state.questionsCount}</span></p>
+          <p>תשובות נכונות: <span class="correct-num">${state.correctAnswers}</span></p>
+          <p>תשובות שגויות: <span class="wrong-num">${state.wrongAnswers}</span></p>
+          <p>אחוז הצלחה: <span class="percentage">${percentage}%</span></p>
         </div>
-    `;
+        <button onclick="resetGame('${gameType}')" class="reset-btn">משחק חדש</button>
+      </div>
+    </div>
+  `;
 
   document.body.insertAdjacentHTML("beforeend", summaryHTML);
 }
 
-/// פונקציית איפוס משחק
 function resetGame(gameType) {
-  if (gameType === "math") {
-    mathQuestionsCount = 0;
-    mathCorrectAnswers = 0;
-    mathWrongAnswers = 0;
-    mathWrongQuestions = [];
-    updateMathScore();
-    generateMathQuestion();
-  } else if (gameType === "sequence") {
-    sequenceQuestionsCount = 0;
-    sequenceCorrectAnswers = 0;
-    sequenceWrongAnswers = 0;
-    sequenceWrongQuestions = [];
-    updateSequenceScore();
-    generateSequence();
-  } else {
-    comparisonQuestionsCount = 0;
-    comparisonCorrectAnswers = 0;
-    comparisonWrongAnswers = 0;
-    updateComparisonScore();
-    generateComparisonQuestion();
-  }
+  const state = gameStates[gameType];
+  Object.assign(state, {
+    questionsCount: 0,
+    correctAnswers: 0,
+    wrongAnswers: 0,
+    wrongQuestions: []
+  });
 
+  updateScore(gameType);
   document.querySelector(".summary-popup")?.remove();
+
+  const generators = {
+    math: generateMathQuestion,
+    sequence: generateSequence,
+    comparison: generateComparisonQuestion
+  };
+
+  generators[gameType]();
 }
 
-// אתחול המשחק
 window.onload = function () {
-  // מאזיני אירועים לכפתורי החלפת משחק
-  document.querySelectorAll(".switch-btn").forEach((button) => {
-    button.addEventListener("click", function () {
-      switchGame(this.dataset.game);
-    });
-  });
+  document
+    .querySelectorAll(".switch-btn")
+    .forEach((btn) =>
+      btn.addEventListener("click", () => switchGame(btn.dataset.game))
+    );
 
-  // מאזיני אירועים לרמות משחק מתמטיקה
-  document.querySelectorAll("#math-game .level-btn").forEach((button) => {
-    button.addEventListener("click", function () {
-      mathCurrentLevel = parseInt(this.dataset.level);
-      document.querySelectorAll("#math-game .level-btn").forEach((btn) => {
-        btn.classList.remove("active");
+  ["math", "sequence", "comparison"].forEach((gameType) => {
+    document.querySelectorAll(`#${gameType}-game .level-btn`).forEach((btn) => {
+      btn.addEventListener("click", function () {
+        gameStates[gameType].level = parseInt(this.dataset.level);
+        document
+          .querySelectorAll(`#${gameType}-game .level-btn`)
+          .forEach((b) => b.classList.remove("active"));
+        this.classList.add("active");
+        const generators = {
+          math: generateMathQuestion,
+          sequence: generateSequence,
+          comparison: generateComparisonQuestion,
+        };
+        generators[gameType]();
       });
-      this.classList.add("active");
-      generateMathQuestion();
     });
   });
 
-  // מאזיני אירועים לפעולות חשבון
-  document.querySelectorAll(".operation-btn").forEach((button) => {
-    button.addEventListener("click", function () {
-      mathCurrentOperation = this.dataset.operation;
-      document.querySelectorAll(".operation-btn").forEach((btn) => {
-        btn.classList.remove("active");
-      });
-      this.classList.add("active");
-      generateMathQuestion();
-    });
-  });
-
-  // מאזיני אירועים למשחק הסדרות
-  document.querySelectorAll(".sequence-type-btn").forEach((button) => {
-    button.addEventListener("click", function () {
-      sequenceCurrentType = this.dataset.type;
-      document.querySelectorAll(".sequence-type-btn").forEach((btn) => {
-        btn.classList.remove("active");
-      });
-      this.classList.add("active");
-      generateSequence();
-    });
-  });
-
-  // מאזיני אירועים לרמות משחק סדרות
-  document.querySelectorAll("#sequence-game .level-btn").forEach((button) => {
-    button.addEventListener("click", function () {
-      sequenceCurrentLevel = parseInt(this.dataset.level);
-      document.querySelectorAll("#sequence-game .level-btn").forEach((btn) => {
-        btn.classList.remove("active");
-      });
-      this.classList.add("active");
-      generateSequence();
-    });
-  });
-
-  // מאזיני אירועים למשחק השוואת מספרים
-  document.querySelectorAll("#comparison-game .level-btn").forEach((button) => {
-    button.addEventListener("click", function () {
-      comparisonCurrentLevel = parseInt(this.dataset.level);
+  document.querySelectorAll(".operation-btn").forEach((btn) => {
+    btn.addEventListener("click", function () {
+      gameStates.math.operation = this.dataset.operation;
       document
-        .querySelectorAll("#comparison-game .level-btn")
-        .forEach((btn) => {
-          btn.classList.remove("active");
-        });
+        .querySelectorAll(".operation-btn")
+        .forEach((b) => b.classList.remove("active"));
       this.classList.add("active");
-      generateComparisonQuestion();
+      generateMathQuestion();
     });
   });
 
-  // מאזיני אירועים לכפתורי בדיקה ותרגיל הבא במתמטיקה
   document
     .getElementById("math-check")
     .addEventListener("click", checkMathAnswer);
   document
     .getElementById("math-next")
     .addEventListener("click", generateMathQuestion);
-
-  // מאזיני אירועים לכפתורי בדיקה וסדרה הבאה
   document
     .getElementById("sequence-check")
     .addEventListener("click", checkSequenceAnswer);
   document
     .getElementById("sequence-next")
     .addEventListener("click", generateSequence);
-
-  // מאזיני אירועים לכפתורי בדיקה למשחק השוואה
   document
     .getElementById("comparison-check")
     .addEventListener("click", checkComparisonAnswer);
@@ -533,28 +397,22 @@ window.onload = function () {
     .getElementById("comparison-next")
     .addEventListener("click", generateComparisonQuestion);
 
-  // מאזין אירועים למקש Enter בשדה הקלט
   document.addEventListener("keypress", function (e) {
     if (e.key === "Enter") {
-      if (currentGame === "math" && document.activeElement.id === "answer") {
-        checkMathAnswer();
-      } else if (
-        currentGame === "sequence" &&
-        document.activeElement.id === "sequence-answer"
-      ) {
-        checkSequenceAnswer();
-      } else if (
-        currentGame === "comparison" &&
-        document.activeElement.id === "comparison-answer"
-      ) {
-        checkComparisonAnswer();
+      const handlers = {
+        math: { id: "answer", handler: checkMathAnswer },
+        sequence: { id: "sequence-answer", handler: checkSequenceAnswer },
+        comparison: { id: "comparison-answer", handler: checkComparisonAnswer },
+      };
+
+      const activeHandler = handlers[currentGame];
+      if (activeHandler && document.activeElement.id === activeHandler.id) {
+        activeHandler.handler();
       }
     }
   });
 
   // אתחול ראשוני
-  updateMathScore();
-  updateSequenceScore();
-  updateComparisonScore();
+  ["math", "sequence", "comparison"].forEach(updateScore);
   generateMathQuestion();
 };
